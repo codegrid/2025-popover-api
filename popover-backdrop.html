@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo</title>
+  <style>
+    .alert {
+      background-color: red;
+      color: white;
+      padding: 1ic;
+      text-align: center;
+    }
+    [popover]::backdrop {
+      backdrop-filter: blur(3px);
+      background-color: rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <p class="alert" hidden>お使いのブラウザは、Popover APIをサポートしていません。</p>
+
+
+  <div id="mypopover" popover>ポップオーバーの中身</div>
+  <button popovertarget="mypopover">ポップオーバーを開閉する</button>
+
+
+  <script>
+    if (!HTMLElement.prototype.hasOwnProperty("popover")) {
+      document.querySelector(".alert").removeAttribute("hidden");
+    }
+  </script>
+</body>
+</html>
