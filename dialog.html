@@ -46,6 +46,17 @@
       margin: 0;
       border-color: blue;
     }
+    .zIndex999 {
+      position: absolute;
+      top: 10px;
+      left: 300px;
+      right: 0;
+      z-index:999;
+      height: 300px;
+      background-color: rgba(0,0,0,0.3); 
+      pointer-events: none;
+      border: 1px dashed black;
+    }
   </style>
 </head>
 <body>
@@ -73,13 +84,15 @@
     <button id="close-showModal">閉じる</button>
   </dialog>
   <dialog popover="auto" id="dialog-popover-auto">
-    <b>モーダル</b>：dialog要素（ポップオーバーAPIを使用したdialog[popover="auto"]の開閉）
+    <b>非モーダル</b>：dialog要素（ポップオーバーAPIを使用したdialog[popover="auto"]の開閉）
     <button id="close-popover-auto">閉じる</button>
   </dialog>
   <dialog popover="manual" id="dialog-popover-manual">
     <b>非モーダル</b>：dialog要素（ポップオーバーAPIを使用したdialog[popover="manual"]の開閉）
     <button id="close-popover-manual">閉じる</button>
   </dialog>
+
+  <div class="zIndex999">z-index: 999;の要素</div>
 
 
   <script>
@@ -124,7 +137,6 @@
     document.getElementById("close-popover-manual").addEventListener("click", () => {
       dialogPopoverManual.hidePopover();
     });
-
   </script>
 
   <script>
