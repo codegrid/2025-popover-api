@@ -7,3 +7,4 @@
 - https://codegrid.github.io/2025-popover-api/popover-popover-open.html
 - https://codegrid.github.io/2025-popover-api/popover-target-action.html
 - https://codegrid.github.io/2025-popover-api/popover.html
+- https://codegrid.github.io/2025-popover-api/dialog.html
