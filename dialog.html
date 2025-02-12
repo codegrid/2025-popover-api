@@ -21,6 +21,10 @@
       gap: 10px;
     }
 
+    dialog {
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
     #dialog-open {
       inset: 50px 0 0 50px;
       margin: 0;
@@ -46,6 +50,11 @@
       margin: 0;
       border-color: blue;
     }
+    #dialog-popover-manual-2 {
+      inset: 180px 0 0 250px;
+      margin: 0;
+      border-color: limegreen;
+    }
     .zIndex999 {
       position: absolute;
       top: 10px;
@@ -69,6 +78,7 @@
     <li><button id="button-showModal">dialog.showModal()による開閉</button></li>
     <li><button id="button-popover-auto" popovertarget="dialog-popover-auto">ポップオーバーAPIを使用したdialog[popover="auto"]の開閉</button></li>
     <li><button id="button-popover-manual" popovertarget="dialog-popover-manual">ポップオーバーAPIを使用したdialog[popover="manual"]の開閉</button></li>
+    <li><button id="button-popover-manual-2" popovertarget="dialog-popover-manual-2">ポップオーバーAPIを使用したdialog[popover="manual"]の開閉(2)</button></li>
   </ul>
 
   <dialog id="dialog-open">
@@ -91,6 +101,10 @@
     <b>非モーダル</b>：dialog要素（ポップオーバーAPIを使用したdialog[popover="manual"]の開閉）
     <button id="close-popover-manual">閉じる</button>
   </dialog>
+  <dialog popover="manual" id="dialog-popover-manual-2">
+    <b>非モーダル</b>：dialog要素（ポップオーバーAPIを使用したdialog[popover="manual"]の開閉）(2)
+    <button id="close-popover-manual-2">閉じる</button>
+  </dialog>
 
   <div class="zIndex999">z-index: 999;の要素</div>
 
@@ -101,6 +115,7 @@
     const dialogShowModal = document.getElementById("dialog-showModal");
     const dialogPopoverAuto = document.getElementById("dialog-popover-auto");
     const dialogPopoverManual = document.getElementById("dialog-popover-manual");
+    const dialogPopoverManual2 = document.getElementById("dialog-popover-manual-2");
 
     document.getElementById("button-open").addEventListener("click", () => {
       dialogOpen.open = !dialogOpen.open;
@@ -136,6 +151,10 @@
 
     document.getElementById("close-popover-manual").addEventListener("click", () => {
       dialogPopoverManual.hidePopover();
+    });
+
+    document.getElementById("close-popover-manual-2").addEventListener("click", () => {
+      dialogPopoverManual2.hidePopover();
     });
   </script>
 
