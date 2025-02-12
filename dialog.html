@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo</title>
+  <style>
+    .alert {
+      background-color: red;
+      color: white;
+      padding: 1ic;
+      text-align: center;
+    }
+  </style>
+  <style>
+    ul {
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+      padding: 0;
+      gap: 10px;
+    }
+
+    #dialog-open {
+      inset: 50px 0 0 50px;
+      margin: 0;
+      border-color: red;
+    }
+    #dialog-show {
+      inset: 80px 0 0 150px;
+      margin: 0;
+      border-color: green;
+    }
+    #dialog-showModal {
+      inset: 130px 0 0 180px;
+      margin: 0;
+      border-color: gold;
+    }
+    #dialog-popover-auto {
+      inset: 150px 0 0 210px;
+      margin: 0;
+      border-color: pink;
+    }
+    #dialog-popover-manual {
+      inset: 170px 0 0 240px;
+      margin: 0;
+      border-color: blue;
+    }
+  </style>
+</head>
+<body>
+  <p class="alert" hidden>お使いのブラウザは、Popover APIをサポートしていません。</p>
+
+
+  <ul>
+    <li><button id="button-open">open属性の切り替えによる開閉</button></li>
+    <li><button id="button-show">dialog.show()による開閉</button></li>
+    <li><button id="button-showModal">dialog.showModal()による開閉</button></li>
+    <li><button id="button-popover-auto" popovertarget="dialog-popover-auto">ポップオーバーAPIを使用したdialog[popover="auto"]の開閉</button></li>
+    <li><button id="button-popover-manual" popovertarget="dialog-popover-manual">ポップオーバーAPIを使用したdialog[popover="manual"]の開閉</button></li>
+  </ul>
+
+  <dialog id="dialog-open">
+    <b>非モーダル</b>：dialog要素（open属性の切り替えによる開閉）
+    <button id="close-open">閉じる</button>
+  </dialog>
+  <dialog id="dialog-show">
+    <b>非モーダル</b>：dialog要素（dialog.show()による開閉）
+    <button id="close-show">閉じる</button>
+  </dialog>
+  <dialog id="dialog-showModal">
+    <b>モーダル</b>：dialog要素（dialog.showModal()による開閉）
+    <button id="close-showModal">閉じる</button>
+  </dialog>
+  <dialog popover="auto" id="dialog-popover-auto">
+    <b>モーダル</b>：dialog要素（ポップオーバーAPIを使用したdialog[popover="auto"]の開閉）
+    <button id="close-popover-auto">閉じる</button>
+  </dialog>
+  <dialog popover="manual" id="dialog-popover-manual">
+    <b>非モーダル</b>：dialog要素（ポップオーバーAPIを使用したdialog[popover="manual"]の開閉）
+    <button id="close-popover-manual">閉じる</button>
+  </dialog>
+
+
+  <script>
+    const dialogOpen = document.getElementById("dialog-open");
+    const dialogShow = document.getElementById("dialog-show");
+    const dialogShowModal = document.getElementById("dialog-showModal");
+    const dialogPopoverAuto = document.getElementById("dialog-popover-auto");
+    const dialogPopoverManual = document.getElementById("dialog-popover-manual");
+
+    document.getElementById("button-open").addEventListener("click", () => {
+      dialogOpen.open = !dialogOpen.open;
+    });
+
+    document.getElementById("button-show").addEventListener("click", () => {
+      if (dialogShow.open) {
+        dialogShow.close();
+      } else {
+        dialogShow.show();
+      }
+    });
+
+    document.getElementById("button-showModal").addEventListener("click", () => {
+      dialogShowModal.showModal();
+    });
+
+    document.getElementById("close-open").addEventListener("click", () => {
+      dialogOpen.open = false;
+    });
+
+    document.getElementById("close-show").addEventListener("click", () => {
+      dialogShow.close();
+    });
+
+    document.getElementById("close-showModal").addEventListener("click", () => {
+      dialogShowModal.close();
+    });
+
+    document.getElementById("close-popover-auto").addEventListener("click", () => {
+      dialogPopoverAuto.hidePopover();
+    });
+
+    document.getElementById("close-popover-manual").addEventListener("click", () => {
+      dialogPopoverManual.hidePopover();
+    });
+
+  </script>
+
+  <script>
+    if (!HTMLElement.prototype.hasOwnProperty("popover")) {
+      document.querySelector(".alert").removeAttribute("hidden");
+    }
+  </script>
+</body>
+</html>
