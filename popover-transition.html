@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo</title>
+  <style>
+    .alert {
+      background-color: red;
+      color: white;
+      padding: 1ic;
+      text-align: center;
+    }
+
+    /* ポップオーバーの見た目 */
+    [popover] {
+      padding: 16px;
+      border-radius: 8px;
+      border: 0;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    }
+
+    /* アニメーション用のスタイル */
+    [popover] {
+      opacity: 0;
+      transform: scale(0);
+      transition:
+        opacity 0.2s,
+        transform 0.7s,
+        overlay 0.7s allow-discrete,
+        display 0.7s allow-discrete;
+    }
+
+    [popover]:popover-open {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    @starting-style {
+      [popover]:popover-open {
+          opacity: 0;
+          transform: scale(0);
+      }
+    }
+
+    /* ポップオーバーの背景のトランジション */
+    [popover]::backdrop {
+      background-color: rgba(0, 0, 0, 0);
+      transition:
+        display 0.7s allow-discrete,
+        overlay 0.7s allow-discrete,
+        background-color 0.7s;
+    }
+
+    [popover]:popover-open::backdrop {
+      background-color: rgba(0, 0, 0, 0.25);
+    }
+
+    @starting-style {
+      [popover]:popover-open::backdrop {
+        background-color: rgba(0, 0, 0, 0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <p class="alert" hidden>お使いのブラウザは、Popover APIをサポートしていません。</p>
+
+
+  <button popovertarget="my-popover">ポップオーバーを表示</button>
+  <div popover="auto" id="my-popover">
+    ポップオーバーです。アニメーションします。
+    <button type="button" popovertarget="my-popover" popovertargetaction="hide">閉じる</button>
+  </div>
+
+
+  <script>
+    if (!HTMLElement.prototype.hasOwnProperty("popover")) {
+      document.querySelector(".alert").removeAttribute("hidden");
+    }
+  </script>
+</body>
+</html>
