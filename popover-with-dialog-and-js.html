@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo</title>
+  <style>
+    .alert {
+      background-color: red;
+      color: white;
+      padding: 1ic;
+      text-align: center;
+    }
+    ::backdrop {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <p class="alert" hidden>お使いのブラウザは、Popover APIをサポートしていません。</p>
+
+  <button type="button" id="open">ダイアログを開く</button>
+  <dialog popover>
+    <p>ダイアログの外側をクリックしても閉じられます。</p>
+    <button type="button" id="close">閉じる</button>
+  </dialog>
+
+  <script>
+    if (!HTMLElement.prototype.hasOwnProperty("popover")) {
+      document.querySelector(".alert").removeAttribute("hidden");
+    }
+    const dialog = document.querySelector('dialog');
+    const openButton = document.querySelector('#open');
+    const closeButton = document.querySelector('#close');
+
+    // ダイアログを開く
+    openButton.addEventListener('click', () => {
+      dialog.showPopover();
+    });
+
+    // ダイアログを閉じる
+    closeButton.addEventListener('click', () => {
+      dialog.hidePopover();
+    });
+  </script>
+</body>
+</html>
